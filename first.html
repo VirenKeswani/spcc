@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+
+    def first(t, grammar, non_terminals):
+        productions = grammar[t]
+        first_set = []
+
+    for production in productions:
+        first_item = production[0]
+
+        for item in production:
+            if item in non_terminals:
+                firsts_of_next = first(first_item)
+
+                if "e" in firsts_of_next:
+                    # firsts_of_next.remove("e")
+                    first_set.extend(firsts_of_next)
+                else:
+                    first_set.extend(firsts_of_next)
+                    break
+
+            else:
+                first_set.append(item)
+                break
+
+    return list(set(first_set))
+
+    </p>
+</body>
+</html>

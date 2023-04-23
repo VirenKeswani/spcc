@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+        %{
+            int vcnt;
+            int ccnt;
+        %}
+        
+        %%
+        \n {  return 1; }
+        [aeiouAEIOU] { vcnt++; printf("Vowel: %s \n",yytext); }
+        [^aeiouAEIOU] { ccnt++; printf("Consonant: %s \n",yytext); }
+        %%
+        
+        void main()
+        {
+            printf("Enter a string: ");
+            yylex();
+            printf("Vowels: %d Consonants: %d",vcnt,ccnt);
+        }
+        int yywrap(){return(1);}
+    </p>
+</body>
+</html>

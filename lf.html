@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+    def find_common_sequence(productions):
+        if len(productions) <= 1:
+            return ""
+
+    if productions[0] == "e":
+        productions = productions[1:]
+
+    max_length = 0
+    for i in range(len(productions)):
+        length = len(productions[i])
+        if length > max_length:
+            max_length = length
+
+    sublength = 1
+
+    common_sequence = ""
+
+    while sublength <= max_length:
+        characters = []
+
+        for item in productions:
+            if len(item) >= sublength and item != "e":
+                characters.append(item[:sublength])
+            else:
+                break
+
+        if len(set(characters)) == 1:
+            common_sequence = characters[0]
+        else:
+            break
+        sublength += 1
+
+    return common_sequence
+
+grammar = {
+    "S": ["aabc", "abad", "abc", "abcd"]
+}
+
+
+for i in range(len(grammar["S"])):
+    if "e" not in grammar["S"][i]:
+        grammar["S"][i] += "e"
+
+counter = 0
+flag = False
+
+while not flag:
+    grammar_end = False
+    key_count = 0
+
+    while not grammar_end:
+        add_e = False
+        flag = False
+        print(grammar)
+
+        try:
+            k = list(grammar.keys())[key_count]
+        except:
+            grammar_end = True
+            flag = True
+            break
+
+        key_count += 1
+        subsequence = find_common_sequence(grammar[k])
+        if subsequence == "":
+            flag = True
+        else:
+            new_key = f"T{counter}"
+            grammar[new_key] = []
+            for item in grammar[k]:
+                item = item.replace(subsequence, "", 1)
+                if item != "e":
+                    grammar[new_key].append(item)
+                else:
+                    add_e = True
+
+            if add_e:
+                grammar[new_key].append("e")
+
+            
+            if "e" in grammar[k]:
+                grammar[k] = [f"{subsequence}T{counter}"]+["e"]
+            else:
+                grammar[k] = [f"{subsequence}T{counter}"]
+
+            counter += 1
+
+for k, v in grammar.items():
+    for i, item in enumerate(v):
+        if len(item) > 1 and "e" in item:
+            grammar[k][i] = item.replace("e", "")
+
+grammar
+    </p>
+</body>
+</html>
