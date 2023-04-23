@@ -26,7 +26,7 @@ for i in lines:
 # print(tokenr)
 keyword = ['for', 'in' , 'print']
 datatype = ['String', 'int']
-operator = ['+', '-', '*', '/', '%', '=', '==', '!=', '>', '<', '>=', '<=', '&&', '||', '!', '++', '--']
+operator = ['+', '-', '*', '/', '%', '=', '==', '!=', '>', 'lt', '>=', ' lt =', '&&', '||', '!', '++', '--']
 seperator = ['(', ')', '{', '}', '[', ']', ';', ',', ' ']
 
 for i in tokenr:
@@ -49,7 +49,7 @@ for i in tokenr:
                 print('Keyword: ', j)
             elif j in datatype:
                 print('Datatype: ', j)
-            elif j in operator and len(j) <= 2:
+            elif j in operator and len(j) lt = 2:
                 print('Operator: ', j)
             elif j in seperator and len(j) == 1:
                 print('Seperator: ', j)

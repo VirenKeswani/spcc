@@ -18,7 +18,7 @@
            (int|float|string|double|char|new) {  display(1,yytext); }
            [a-zA-Z][a-zA-Z0-9]* { display(2,yytext); }
            [,;{}()\[\]] { display(3,yytext); }
-           [+*/=><-] { display(4,yytext); }
+           [+*/=> lt -] { display(4,yytext); }
            .[-]*[0-9]+ { display(5,yytext); }
            
            
